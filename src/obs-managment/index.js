@@ -1,11 +1,16 @@
 import ObsWebSocket from "obs-websocket-js";
 import store from "../store/index";
+import fileStream from "fs";
+
+var connectionInfo = JSON.parse(
+  fileStream.readFileSync("../../setting.json", "utf-8")
+);
 
 const obs = new ObsWebSocket();
 obs
   .connect({
-    address: "192.168.1.124:4444",
-    password: "alakara12",
+    address: connectionInfo.address,
+    password: connectionInfo.password,
   })
   .then(() => {
     console.log(`Success! We're connected & authenticated.`);
