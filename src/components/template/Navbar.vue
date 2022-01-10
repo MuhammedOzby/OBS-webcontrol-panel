@@ -27,6 +27,7 @@
         <li><a>Record</a></li>
         <li><a>Sound</a></li>
         <li><a>Others</a></li>
+        <li><router-link to="/tools">Tools</router-link></li>
         <li><router-link to="/about">About</router-link></li>
       </ul>
     </div>
