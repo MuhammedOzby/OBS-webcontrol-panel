@@ -1,28 +1,30 @@
 <template>
-  <div class="tile is-child box" id="StreamStatus" v-if="liveStatus.streaming">
-    <table class="table is-fullwidth">
-      <tbody>
-        <tr>
-          <td class="varStart">Time</td>
-          <td class="varEnd">{{ liveStatus["stream-timecode"] }}</td>
-        </tr>
-        <tr>
-          <td class="varStart">kb/s</td>
-          <td class="varEnd">
-            {{ liveStatus["kbits-per-sec"] }}
-          </td>
-        </tr>
-        <tr>
-          <td class="varStart">FPS</td>
-          <td class="varEnd">{{ liveStatus.fps.toFixed(2) }}</td>
-        </tr>
-        <tr>
-          <td class="varStart">Drop Frame</td>
-          <td class="varEnd">{{ liveStatus["num-dropped-frames"] }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <nav class="level" v-if="liveStatus.streaming">
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Time</p>
+        <p class="title">{{ liveStatus["stream-timecode"] }}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">kb/s</p>
+        <p class="title">{{ liveStatus["kbits-per-sec"] }}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">FPS</p>
+        <p class="title">{{ liveStatus.fps.toFixed(2) }}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Drop Frame</p>
+        <p class="title">{{ liveStatus["num-dropped-frames"] }}</p>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -37,8 +39,8 @@ export default {
     };
   },
   created() {
-    ObsWebSocket.on("StreamStatus", (status) => {
-      this.liveStatus = status;
+    ObsWebSocket.on("StreamStatus", (params) => {
+      this.liveStatus = params;
       this.textColor = "has-text-success";
     });
     ObsWebSocket.on("StreamStopping", () => {
@@ -55,7 +57,20 @@ export default {
       this.textColor = "has-text-success";
     });
   },
-  methods: {},
+  beforeDestroy() {
+    ObsWebSocket.removeAllListeners("StreamStatus");
+    ObsWebSocket.removeAllListeners("StreamStopping");
+    ObsWebSocket.removeAllListeners("StreamStopped");
+    ObsWebSocket.removeAllListeners("StreamStarting");
+    ObsWebSocket.removeAllListeners("StreamStarted");
+    console.log(ObsWebSocket);
+  },
+  methods: {
+    status(params) {
+      this.liveStatus = params;
+      this.textColor = "has-text-success";
+    },
+  },
 };
 </script>
 

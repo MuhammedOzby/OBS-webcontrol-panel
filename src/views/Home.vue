@@ -44,13 +44,7 @@
 
 <script>
 import LiveStatus from "@/components/Stream/StreamStartStop.vue";
-import ObsWebsockets from "@/obs-managment/index.js";
 export default {
-  created() {
-    ObsWebsockets.send("GetSceneList").then((data) => {
-      console.log(data);
-    });
-  },
   name: "Home",
   components: {
     LiveStatus,

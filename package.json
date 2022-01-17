@@ -12,6 +12,7 @@
     "buefy": "^0.9.13",
     "obs-websocket-js": "^4.0.3",
     "socket.io": "^4.4.0",
+    "socket.io-client": "^4.4.1",
     "vue": "^2.6.11",
     "vue-material-design-icons": "^5.0.0",
     "vue-router": "^3.2.0",

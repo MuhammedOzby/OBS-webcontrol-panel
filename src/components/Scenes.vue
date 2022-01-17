@@ -1,20 +1,18 @@
 <template>
-  <div id="Scenes">
-    <div class="tile is-child box">
-      <p class="title">Active Scene: {{ ScenesData["current-scene"] }}</p>
-      <div class="columns">
-        <div
-          class="column is-half"
-          v-for="(scene, id) in ScenesData.scenes"
-          :key="id"
+  <div class="tile is-child box" id="Scenes">
+    <p class="title">Active Scene: {{ ScenesData["current-scene"] }}</p>
+    <div class="tile is-ancestor" style="flex-wrap: wrap">
+      <div
+        class="tile is-parent is-4 scene-buttons"
+        v-for="(scene, id) in ScenesData.scenes"
+        :key="id"
+      >
+        <b-button
+          expanded
+          :focused="scene.name == ScenesData['current-scene']"
+          @click="sceneChanger(scene.name)"
+          >{{ scene.name }}</b-button
         >
-          <b-button
-            expanded
-            :focused="scene.name == ScenesData['current-scene']"
-            @click="sceneChanger(scene.name)"
-            >{{ scene.name }}</b-button
-          >
-        </div>
       </div>
     </div>
   </div>
@@ -49,8 +47,7 @@ export default {
 </script>
 
 <style scoped>
-#Scenes {
-  width: 100%;
-  height: 100%;
+.scene-buttons {
+  padding: 5px;
 }
 </style>

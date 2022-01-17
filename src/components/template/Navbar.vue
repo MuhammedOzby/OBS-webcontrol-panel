@@ -1,5 +1,9 @@
 <template>
   <div id="Navbar">
+    <div class="screen-type" @click="fullScreen()">
+      <span class="mdi mdi-36px mdi-fullscreen" v-if="!screenStatus"></span>
+      <span class="mdi mdi-36px mdi-fullscreen-exit" v-else></span>
+    </div>
     <h1>
       <span class="mdi mdi-connection"></span>
       Connection status :
@@ -37,7 +41,28 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+  data() {
+    return {
+      screenStatus: false,
+    };
+  },
   name: "Navbar",
+  created() {
+    this.screenStatus = document.fullscreen;
+  },
+  methods: {
+    fullScreen() {
+      if (this.screenStatus) {
+        document.exitFullscreen().then(() => {
+          this.screenStatus = document.fullscreen;
+        });
+      } else {
+        document.documentElement.requestFullscreen().then(() => {
+          this.screenStatus = document.fullscreen;
+        });
+      }
+    },
+  },
   components: {},
   computed: {
     ...mapGetters("obsWebSocket", [
@@ -56,5 +81,10 @@ export default {
 }
 h1 {
   text-align: center;
+}
+.screen-type {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 </style>
