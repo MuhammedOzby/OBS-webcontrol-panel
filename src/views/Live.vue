@@ -2,13 +2,22 @@
   <div id="Live">
     <StreamStatus />
     <div class="tile is-ancestor">
-      <div class="tile is-4 is-vertical is-parent">
-        <StreamStartStop />
+      <div class="tile is-vertical is-12">
+        <div class="tile">
+          <!-- <div class="tile is-parent is-3">
+            <StreamStartStop />
+          </div> -->
+          <div class="tile is-parent">
+            <Scenes />
+          </div>
+        </div>
+        <div class="tile is-parent">
+          <Sources />
+        </div>
       </div>
-      <div class="tile is-8 is-vertical is-parent">
-        <Scenes />
-        <Sources />
-      </div>
+    </div>
+    <div class="start-stream-drawer">
+      <StreamStartStop />
     </div>
   </div>
 </template>
@@ -29,4 +38,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.start-stream-drawer {
+  position: fixed;
+  top: 10%;
+  left: -5px;
+}
+</style>

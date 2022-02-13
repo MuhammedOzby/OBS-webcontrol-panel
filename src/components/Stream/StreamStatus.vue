@@ -39,8 +39,8 @@ export default {
     };
   },
   created() {
-    ObsWebSocket.on("StreamStatus", (params) => {
-      this.liveStatus = params;
+    ObsWebSocket.on("StreamStatus", (stats) => {
+      this.liveStatus = stats;
       this.textColor = "has-text-success";
     });
     ObsWebSocket.on("StreamStopping", () => {
@@ -63,7 +63,6 @@ export default {
     ObsWebSocket.removeAllListeners("StreamStopped");
     ObsWebSocket.removeAllListeners("StreamStarting");
     ObsWebSocket.removeAllListeners("StreamStarted");
-    console.log(ObsWebSocket);
   },
   methods: {
     status(params) {

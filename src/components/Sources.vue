@@ -3,7 +3,7 @@
     <p class="title">Sources:</p>
     <div class="tile is-ancestor" style="flex-wrap: wrap">
       <div
-        class="tile is-parent is-4 source-buttons"
+        class="tile is-2 source-buttons"
         v-for="(source, id) in filterSources(SourcesData)"
         :key="id"
       >

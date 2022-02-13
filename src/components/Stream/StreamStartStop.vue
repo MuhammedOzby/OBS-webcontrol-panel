@@ -1,7 +1,16 @@
 <template>
-  <div class="tile is-child box" id="StreamStartStop" @click="LiveStart()">
+  <div
+    class="tile is-child box"
+    @mouseover="statusText = true"
+    @mouseleave="statusText = false"
+    id="StreamStartStop"
+    @click="LiveStart()"
+  >
     <p v-bind:class="[title, textColor]">
-      <span class="mdi mdi-36px mdi-account-voice"></span> {{ streamStatus }}
+      <span class="mdi mdi-36px mdi-account-voice"></span>
+      <transition name="fade">
+        <span v-show="statusText" class="btn-text"> {{ streamStatus }}</span>
+      </transition>
     </p>
   </div>
 </template>
@@ -12,6 +21,7 @@ export default {
   name: "StreamStartStop",
   data() {
     return {
+      statusText: false,
       title: "title",
       textColor: "has-text-grey",
       liveStatus: { streaming: false },
@@ -52,5 +62,15 @@ export default {
 <style scoped>
 #StreamStartStop {
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
