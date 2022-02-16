@@ -7,7 +7,7 @@
     @click="LiveStart()"
   >
     <p v-bind:class="[title, textColor]">
-      <span class="mdi mdi-36px mdi-account-voice"></span>
+      <span class="mdi mdi-36px mdi-broadcast"></span>
       <transition name="fade">
         <span v-show="statusText" class="btn-text"> {{ streamStatus }}</span>
       </transition>
@@ -28,7 +28,7 @@ export default {
       streamStatus: "Live Off",
     };
   },
-  created() {
+  beforeCreate() {
     ObsWebSocket.on("StreamStatus", (status) => {
       this.liveStatus = status;
       this.textColor = "has-text-success";
@@ -50,6 +50,13 @@ export default {
       this.textColor = "has-text-success";
       this.streamStatus = "Live On";
     });
+  },
+  beforeDestroy() {
+    ObsWebSocket.removeAllListeners("StreamStatus");
+    ObsWebSocket.removeAllListeners("StreamStopping");
+    ObsWebSocket.removeAllListeners("StreamStopped");
+    ObsWebSocket.removeAllListeners("StreamStarting");
+    ObsWebSocket.removeAllListeners("StreamStarted");
   },
   methods: {
     LiveStart() {
