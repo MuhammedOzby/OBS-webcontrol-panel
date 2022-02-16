@@ -26,13 +26,63 @@
     </h1>
     <div class="tabs is-centered">
       <ul>
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/live">Live</router-link></li>
-        <li><a>Record</a></li>
-        <li><a>Sound</a></li>
-        <li><a>Others</a></li>
-        <li><router-link to="/tools">Tools</router-link></li>
-        <li><router-link to="/about">About</router-link></li>
+        <li v-bind:class="{ 'is-active': currentRouteName == 'Home' }">
+          <router-link to="/">
+            <span class="icon is-small">
+              <i class="mdi mdi-24px mdi-home" aria-hidden="true"> </i>
+            </span>
+            Home
+          </router-link>
+        </li>
+        <li v-bind:class="{ 'is-active': currentRouteName == 'Live' }">
+          <router-link to="/live">
+            <span class="icon is-small">
+              <i class="mdi mdi-24px mdi-broadcast" aria-hidden="true"> </i>
+            </span>
+            Live
+          </router-link>
+        </li>
+        <li v-bind:class="{ 'is-active': currentRouteName == 'Record' }">
+          <router-link to="/record">
+            <span class="icon is-small">
+              <i class="mdi mdi-24px mdi-record" aria-hidden="true"> </i>
+            </span>
+            Record
+          </router-link>
+        </li>
+        <li v-bind:class="{ 'is-active': currentRouteName == 'Sound' }">
+          <router-link to="/sound">
+            <span class="icon is-small">
+              <i class="mdi mdi-24px mdi-volume-high" aria-hidden="true"> </i>
+            </span>
+            Sound
+          </router-link>
+        </li>
+        <li v-bind:class="{ 'is-active': currentRouteName == 'Others' }">
+          <router-link to="/others">
+            <span class="icon is-small">
+              <i class="mdi mdi-24px mdi-cog" aria-hidden="true"> </i>
+            </span>
+            Others
+          </router-link>
+        </li>
+        <li v-bind:class="{ 'is-active': currentRouteName == 'Tools' }">
+          <router-link to="/tools">
+            <span class="icon is-small">
+              <i class="mdi mdi-24px mdi-hammer-screwdriver" aria-hidden="true">
+              </i>
+            </span>
+            Tools
+          </router-link>
+        </li>
+        <li v-bind:class="{ 'is-active': currentRouteName == 'About' }">
+          <router-link to="/about">
+            <span class="icon is-small">
+              <i class="mdi mdi-24px mdi-information" aria-hidden="true"> </i>
+            </span>
+            About
+          </router-link>
+        </li>
       </ul>
     </div>
   </div>
@@ -65,6 +115,9 @@ export default {
   },
   components: {},
   computed: {
+    currentRouteName() {
+      return this.$route.name;
+    },
     ...mapGetters("obsWebSocket", [
       "getConnectionStatus",
       "getAuthenticationStatus",

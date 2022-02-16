@@ -24,6 +24,34 @@ const routes = [
       return import("../views/Live.vue");
     },
   },
+  {
+    path: "/record",
+    name: "Record",
+    component: function () {
+      return import("../views/Record.vue");
+    },
+  },
+  {
+    path: "/sound",
+    name: "Sound",
+    component: function () {
+      return import("../views/Sound.vue");
+    },
+  },
+  {
+    path: "/others",
+    name: "Others",
+    component: function () {
+      return import("../views/Others.vue");
+    },
+  },
+  {
+    path: "/tools",
+    name: "Tools",
+    component: function () {
+      return import("../views/Tools.vue");
+    },
+  },
 ];
 
 const router = new VueRouter({
